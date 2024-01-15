@@ -20,9 +20,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # tasks_board
 
 # login details
-enter "Prime" in the username box and click login button
+enter "prime" in the username box and click login button
 also can login with other users
-"ojotayoh"
+"ojotayoh",
 "Olawale"
 
 each users has their own tasks attached to them.
