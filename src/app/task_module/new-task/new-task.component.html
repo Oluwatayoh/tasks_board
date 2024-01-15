@@ -1,0 +1,7 @@
+<div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-700 bg-opacity-50"
+     [ngClass]="{'opacity-100': show, 'opacity-0': !show, 'pointer-events-auto': show, 'pointer-events-none': !show}"
+     (click)="close()">
+  <div #modal class="bg-white p-4 rounded shadow-md" (click)="($event.stopPropagation())">
+    <ng-content></ng-content>
+  </div>
+</div>

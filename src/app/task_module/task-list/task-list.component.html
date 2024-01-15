@@ -1,0 +1,114 @@
+<!-- <header class="bg-white shadow">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Tasks Board</h1>
+  </div>
+</header> -->
+
+<header class="bg-white shadow">
+  <div class="lg:flex lg:items-center lg:justify-between mx-auto max-w-8xl px-4 py-6 sm:px-4 lg:px-6">
+    <div class="min-w-0 flex-1">
+      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Task Board
+        Management </h2>
+      <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+        <div class="mt-2 flex items-center text-sm text-gray-500">
+          <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+            aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"
+              clip-rule="evenodd" />
+          </svg>
+          {{now | date}}
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="mt-5 flex lg:ml-4 lg:mt-0">
+
+      <div class="min-w-0 flex-1">
+        <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">{{
+          storedUser.name}} </h2>
+        <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+          <div class="mt-2 flex items-center text-sm text-gray-500" (click)="logOut()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
+            </svg>
+
+            Log Out
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+<br>
+
+
+<div class="container mx-auto px-8">
+
+  <button (click)="openDialog()" type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">Add
+    Task</button>
+  <div class="flex flex-col lg:flex-row justify-center space-x-4">
+    <div class="flex-1">
+      <div class="bg-white p-4 rounded shadow mb-4">
+        <h2 class="text-xl font-semibold mb-4">To Do</h2>
+        <div id="todo" class="p-2 rounded droppable" (drop)="drop($event, 'todo')" (dragover)="allowDrop($event)">
+          <app-task *ngFor="let task of todoTasks" id="{{ task.id }}" draggable="true" (dragstart)="drag($event)"
+            [task]="task" (click)="onEdit(task)"></app-task>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-1">
+      <div class="bg-white p-4 rounded shadow mb-4">
+        <h2 class="text-xl font-semibold mb-4">Pending</h2>
+        <div id="pending" class="p-2 rounded droppable" (drop)="drop($event, 'pending')" (dragover)="allowDrop($event)">
+          <app-task *ngFor="let task of pendingTasks" id="{{ task.id }}" draggable="true" (dragstart)="drag($event)"
+            [task]="task" (click)="onEdit(task)"></app-task>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-1">
+      <div class="bg-white p-4 rounded shadow mb-4">
+        <h2 class="text-xl font-semibold mb-4">In Progress</h2>
+        <div id="inProgress" class="p-2 rounded droppable" (drop)="drop($event, 'inProgress')"
+          (dragover)="allowDrop($event)">
+          <app-task *ngFor="let task of inProgressTasks" id="{{ task.id }}" draggable="true" (dragstart)="drag($event)"
+            [task]="task" (click)="onEdit(task)"></app-task>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-1">
+      <div class="bg-white p-4 rounded shadow mb-4">
+        <h2 class="text-xl font-semibold mb-4">Complete</h2>
+        <div id="complete" class="p-2 rounded droppable" (drop)="drop($event, 'complete')"
+          (dragover)="allowDrop($event)">
+          <app-task *ngFor="let task of completeTasks" id="{{ task.id }}" draggable="true" (dragstart)="drag($event)"
+            [task]="task" (click)="onEdit(task)"></app-task>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-new-task [show]="isModalOpen">
+  <h4>New Task</h4>
+  <div class="mt-4">
+    <input type="text" [(ngModel)]="title" class="w-full p-2 border rounded" placeholder="Title" required>
+    <br>
+    <input type="text" [(ngModel)]="description" class="w-full p-2 border rounded" placeholder="Description" required>
+    <br>
+    <input type="date" [(ngModel)]="dueDate" class="w-full p-2 border rounded" placeholder="Due Date" required>
+  </div>
+  <!--  <p>Description: {{ selectedTask?.description }}</p>
+  <p>Due Date: {{ selectedTask?.dueDate | date }}</p>
+  <p>Status: {{ selectedTask?.status }}</p> -->
+  <button (click)="edit ?  editTask() : addTask()" class="mt-2 bg-blue-500 text-white p-2 rounded">Add</button>
+</app-new-task>

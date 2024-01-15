@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.transparent-overlay {
+  top: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2000;
+  background-color: rgba(22, 33, 40, 0.38);
+  right: 0;
+  display: none;
+}
+
+.transparent-overlay .loading-img {
+  width: 100px;
+  margin: auto;
+  height: 100vh;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}

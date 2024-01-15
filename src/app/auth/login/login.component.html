@@ -1,0 +1,18 @@
+<div class="bg-gray-100 flex items-center justify-center h-screen">
+
+  <div class="bg-white p-8 rounded shadow-md w-96">
+    <h2 class="text-2xl font-semibold mb-6">Welcome</h2>
+    <br>
+    <div>
+      <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-600">kindy enter your username to login</label>
+        <input type="text" id="username" name="username" [(ngModel)]="username"
+          class="mt-1 p-2 w-full border rounded-md" placeholder="Enter your username" required>
+      </div>
+      <button type="submit" (click)="login()"
+        class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-700">
+        Log In
+      </button>
+    </div>
+  </div>
+</div>
